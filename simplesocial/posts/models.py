@@ -23,6 +23,14 @@ class Post(models.Model):
     self.message_html = misaka.html(self.message)
     super().save(*args, **kwargs)
 
+  def get_absoulte_url(self):
+    return reverse('post:single', kwargs={'username': self.user.username, 'pk':self.pk})
+  
+  class Meta:
+    ordering =['-create_at']
+    unique_together = ['user', 'message']
+  
+
   
 
 
